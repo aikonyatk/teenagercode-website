@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modal) {
                 modal.style.display = 'flex';
                 
-                // Логика анимации пульсации (ripple) - оставлена для совместимости
+                // Логика анимации пульсации (ripple)
                 const ripple = document.createElement('div');
                 ripple.style.position = 'absolute';
                 ripple.style.borderRadius = '50%';
@@ -64,47 +64,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- НОВАЯ ЛОГИКА ОБРАБОТКИ ОТПРАВКИ ФОРМЫ (ОТПРАВКА В GOOGLE ТАБЛИЦУ) ---
+    // --- ИСПРАВЛЕННАЯ ЛОГИКА ОБРАБОТКИ ОТПРАВКИ ФОРМЫ (URL-encoded) ---
     if (registrationForm && modal) {
         registrationForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Останавливаем перезагрузку страницы
+            e.preventDefault(); 
             
             const lang = document.documentElement.lang || 'ru'; 
             const userName = document.getElementById('userName').value;
             const userPhone = document.getElementById('userPhone').value;
             
-            // 1. Собираем данные в формате JSON
-            const dataToSend = {
+            // 1. Собираем данные в JavaScript Map
+            const dataMap = {
                 userName: userName,
                 userPhone: userPhone,
                 lang: lang
             };
+
+            // 2. Преобразуем Map в URL-параметры (ключ1=значение1&ключ2=значение2...)
+            const formBody = Object.keys(dataMap).map(key => 
+                encodeURIComponent(key) + '=' + encodeURIComponent(dataMap[key])
+            ).join('&');
             
             try {
-                // 2. Отправляем данные в Google Apps Script (используем ваш URL)
+                // 3. Отправляем данные как обычную форму!
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dataToSend)
+                    // Обязательно меняем заголовок на url-encoded
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+                    body: formBody // Отправляем строку параметров
                 });
                 
-                // 3. Получаем и проверяем ответ
+                // 4. Получаем и проверяем ответ от Google (Apps Script пришлет JSON)
                 const result = await response.json();
                 
                 if (result.result === 'success') {
-                    showSuccessAlert(lang); // Успех!
+                    showSuccessAlert(lang); 
                 } else {
                     console.error("Ошибка при сохранении в Таблицу:", result.message);
                     alert(`Не удалось отправить заявку. Ошибка: ${result.message}`);
                 }
                 
             } catch (error) {
-                // Ошибка сети
                 console.error("Ошибка сети или сервера:", error);
                 alert("Не удалось отправить заявку. Пожалуйста, проверьте ваше подключение.");
             }
             
-            // 4. Скрываем модальное окно и очищаем поля
+            // 5. Скрываем модальное окно и очищаем поля
             modal.style.display = 'none';
             registrationForm.reset();
         });
