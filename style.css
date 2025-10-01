@@ -1,0 +1,746 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+    --bg-dark: #0a0e27;
+    --bg-darker: #050817;
+    --navy: #1a1f3a;
+    --cyan: #00ffff;
+    --purple: #b537f2;
+    --pink: #ff006e;
+    --blue-glow: #00d9ff;
+    --text-light: #e8e9f3;
+    --text-gray: #9ca3bc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- STARS BACKGROUND --- */
+.stars,
+.stars2,
+.stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.stars {
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='20' cy='30' r='1' fill='%23ffffff' opacity='0.8'/%3E%3Ccircle cx='60' cy='70' r='1' fill='%2300ffff' opacity='0.6'/%3E%3Ccircle cx='80' cy='20' r='0.5' fill='%23ffffff' opacity='0.7'/%3E%3C/svg%3E") repeat;
+    animation: animateStars 100s linear infinite;
+}
+
+.stars2 {
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Ccircle cx='40' cy='50' r='1.5' fill='%23b537f2' opacity='0.5'/%3E%3Ccircle cx='100' cy='90' r='1' fill='%2300d9ff' opacity='0.4'/%3E%3C/svg%3E") repeat;
+    animation: animateStars 150s linear infinite;
+}
+
+.stars3 {
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ccircle cx='60' cy='80' r='2' fill='%23ff006e' opacity='0.3'/%3E%3Ccircle cx='140' cy='120' r='1' fill='%2300ffff' opacity='0.4'/%3E%3C/svg%3E") repeat;
+    animation: animateStars 200s linear infinite;
+}
+
+@keyframes animateStars {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
+}
+
+/* --- NAV BAR --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.bracket {
+    color: var(--cyan);
+    font-weight: 700;
+}
+
+.lang-switcher a {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.lang-switcher a:hover {
+    color: var(--cyan);
+}
+
+.lang-switcher .active {
+    color: var(--cyan);
+    font-weight: 700;
+    text-shadow: 0 0 5px var(--cyan);
+}
+
+.nav-cta {
+    background: transparent;
+    border: 2px solid var(--cyan);
+    color: var(--cyan);
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-cta:hover {
+    background: var(--cyan);
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px var(--cyan);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    padding: 80px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glitch {
+    position: relative;
+}
+
+.hero-subtitle {
+    font-size: 22px;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.cta-button {
+    position: relative;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    border: none;
+    padding: 20px 48px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+}
+
+.cta-button .glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cta-button:hover .glow {
+    opacity: 1;
+    animation: rotateGlow 2s linear infinite;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.code-window {
+    background: var(--bg-darker);
+    border: 2px solid var(--navy);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0, 255, 255, 0.2);
+}
+
+.window-header {
+    background: var(--navy);
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.code-content {
+    padding: 32px;
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.keyword { color: var(--pink); }
+.function { color: var(--cyan); }
+.string { color: var(--purple); }
+
+/* --- GLOBAL LAYOUT & TYPOGRAPHY --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+}
+
+.section-title {
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 48px;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+section {
+    padding: 120px 0;
+    position: relative;
+}
+
+.about {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+}
+
+.section-text {
+    font-size: 20px;
+    line-height: 1.8;
+    color: var(--text-gray);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 64px;
+}
+
+/* --- BENEFITS GRID --- */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+}
+
+.benefit-card {
+    background: var(--navy);
+    padding: 40px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.benefit-card:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    transform: translateY(-8px);
+}
+
+.icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.benefit-card h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--cyan);
+}
+
+.benefit-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+/* --- SKILLS/CURRICULUM --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.skill-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--bg-darker) 100%);
+    padding: 40px;
+    border-radius: 16px;
+    border-left: 4px solid var(--purple);
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    border-left-color: var(--cyan);
+    box-shadow: 0 0 40px rgba(181, 55, 242, 0.2);
+}
+
+.skill-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--purple);
+    opacity: 0.3;
+    margin-bottom: 16px;
+}
+
+.skill-card h3 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: var(--cyan);
+}
+
+.skill-card p {
+    color: var(--text-gray);
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+/* --- WHY SECTION (Features) --- */
+.why {
+    background: var(--bg-darker);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+}
+
+.feature {
+    display: flex;
+    gap: 24px;
+}
+
+.feature-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.feature h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--cyan);
+}
+
+.feature p {
+    color: var(--text-gray);
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+/* --- FORMAT SECTION --- */
+.format-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.format-card {
+    background: var(--navy);
+    padding: 40px 32px;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.format-card:hover {
+    border-color: var(--pink);
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.2);
+}
+
+.format-card h3 {
+    font-size: 18px;
+    color: var(--text-gray);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.format-highlight {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 8px;
+}
+
+.format-card > p:last-child {
+    color: var(--text-gray);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* --- TESTIMONIALS --- */
+.testimonials {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.testimonial-card {
+    background: var(--navy);
+    padding: 40px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    border-color: var(--purple);
+    box-shadow: 0 0 40px rgba(181, 55, 242, 0.2);
+    transform: translateY(-4px);
+}
+
+.stars-rating {
+    color: var(--cyan);
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.testimonial-card > p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.student-info h4 {
+    color: var(--cyan);
+    margin-bottom: 4px;
+}
+
+.student-info p {
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+/* --- FINAL CTA --- */
+.final-cta {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--bg-darker) 100%);
+    text-align: center;
+}
+
+.cta-title {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--cyan), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-text {
+    font-size: 24px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+.urgency {
+    color: var(--text-gray);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.cta-button.large {
+    font-size: 24px;
+    padding: 24px 64px;
+}
+
+.guarantee {
+    margin-top: 24px;
+    color: var(--text-gray);
+    font-size: 16px;
+}
+
+/* --- FOOTER --- */
+footer {
+    background: var(--bg-darker);
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--navy);
+}
+
+.footer-content {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.footer-content p {
+    color: var(--text-gray);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--navy);
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+/* ======================================= */
+/* === СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА (NEW) === */
+/* ======================================= */
+
+/* Фон модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию, управляется JS */
+    position: fixed; 
+    z-index: 1000; /* Очень высокий, чтобы быть поверх всего */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.85); /* Затемненный фон */
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+}
+
+/* Содержимое модального окна (сама форма) */
+.modal-content {
+    background-color: var(--bg-darker); 
+    color: var(--text-light);
+    margin: 10% auto; /* 10% сверху и по центру */
+    padding: 30px;
+    border: 2px solid var(--cyan); /* Неоновая рамка */
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); /* Неоновое свечение */
+    position: relative;
+    animation: modalSlideDown 0.4s ease-out;
+}
+
+/* Кнопка закрытия */
+.close-button {
+    color: var(--text-gray);
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    font-size: 32px;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--pink); 
+}
+
+/* Заголовки и подзаголовки формы */
+.modal-title {
+    color: var(--cyan);
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+    font-size: 32px;
+}
+
+.modal-subtitle {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-gray);
+    font-size: 16px;
+}
+
+/* Стили для полей ввода */
+#registrationForm input {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--navy);
+    background-color: var(--navy);
+    color: var(--text-light);
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#registrationForm input:focus {
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 15px rgba(181, 55, 242, 0.5);
+}
+
+/* Кнопка отправки формы - повторяет стиль CTA */
+.modal-submit-btn {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 20px;
+    font-size: 18px;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.modal-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 0, 110, 0.4);
+}
+
+/* Анимация появления модального окна */
+@keyframes modalSlideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- MEDIA QUERIES --- (Адаптивность) */
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 60px 32px;
+    }
+
+    .hero-content h1 {
+        font-size: 56px;
+    }
+
+    .benefits-grid,
+    .skills-grid,
+    .features,
+    .format-grid,
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 42px;
+    }
+
+    .format-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px 24px;
+    }
+
+    .hero-content h1 {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    .container {
+        padding: 0 24px;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    .cta-title {
+        font-size: 36px;
+    }
+
+    .format-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-cta {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .cta-button {
+        padding: 16px 32px;
+        font-size: 18px;
+    }
+
+    .modal-content {
+        margin: 20% auto; /* Поднимаем модал на мобильных */
+    }
+}
